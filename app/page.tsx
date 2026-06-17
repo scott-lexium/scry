@@ -11,7 +11,7 @@ import AppleIcon from '@/components/icons/AppleIcon'
 import WindowsIcon from '@/components/icons/WindowsIcon'
 import LinuxIcon from '@/components/icons/LinuxIcon'
 
-const RELEASES = 'https://github.com/Scottlexium/scrcpy/releases/latest'
+const RELEASES = 'https://github.com/scott-lexium/scrcpy/releases/latest'
 
 export default function Home() {
   return (
@@ -76,7 +76,7 @@ export default function Home() {
               Download free
             </Link>
             <Link
-              href="https://github.com/Scottlexium/scrcpy"
+              href="https://github.com/scott-lexium/scrcpy"
               target="_blank"
               className="inline-flex items-center gap-2 bg-[#16162a] border border-[#1f1f38] text-[#ededf5] px-6 py-3.5 rounded-xl text-[15px] font-semibold hover:border-[#6c5ce7] hover:bg-[rgba(108,92,231,0.1)] transition-all"
             >
