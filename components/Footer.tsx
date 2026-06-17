@@ -9,9 +9,9 @@ const links = {
     { label: 'Security',     href: '/#security' },
   ],
   Project: [
-    { label: 'GitHub',        href: 'https://github.com/Scottlexium/scrcpy' },
-    { label: 'Releases',      href: 'https://github.com/Scottlexium/scrcpy/releases' },
-    { label: 'Report an issue', href: 'https://github.com/Scottlexium/scrcpy/issues' },
+    { label: 'GitHub',        href: 'https://github.com/scott-lexium/scrcpy' },
+    { label: 'Releases',      href: 'https://github.com/scott-lexium/scrcpy/releases' },
+    { label: 'Report an issue', href: 'https://github.com/scott-lexium/scrcpy/issues' },
     { label: 'Upstream scrcpy', href: 'https://github.com/Genymobile/scrcpy' },
   ],
 }
@@ -24,7 +24,7 @@ export default function Footer() {
           <div className="max-w-[260px]">
             <div className="flex items-center gap-2.5 font-bold text-[15px] mb-3">
               <Image src="/icon.png" alt="icon" width={28} height={28} className="rounded-[7px]" />
-              scrcpy GUI
+              Scry
             </div>
             <p className="text-[13px] text-[#8888b8] leading-relaxed">
               Free, open-source GUI wrapper for scrcpy. Mirror and control your Android device without touching a terminal.
@@ -58,10 +58,10 @@ export default function Footer() {
             <Link href="https://github.com/Genymobile/scrcpy" target="_blank" className="text-[#8888b8] hover:text-[#ededf5]">
               scrcpy
             </Link>{' '}
-            by Genymobile. GUI by Scottlexium.
+            by Genymobile. Scry by scott-lexium.
           </span>
           <Link
-            href="https://github.com/Scottlexium/scrcpy/blob/master/LICENSE"
+            href="https://github.com/scott-lexium/scrcpy/blob/master/LICENSE"
             target="_blank"
             className="text-[#8888b8] hover:text-[#ededf5]"
           >

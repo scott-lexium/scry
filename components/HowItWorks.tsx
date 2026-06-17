@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const steps = [
   {
-    title: 'Download and open scrcpy GUI',
+    title: 'Download and open Scry',
     desc: 'Download the installer for your platform and open it. On first launch the app checks for ADB and scrcpy automatically.',
   },
   {

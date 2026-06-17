@@ -28,7 +28,7 @@ export default function AppMockup() {
           <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
           <div className="w-3 h-3 rounded-full bg-[#28c840]" />
           <span className="flex-1 text-center text-[12px] text-[#8888b8] font-medium pr-[52px]">
-            scrcpy GUI
+            Scry
           </span>
         </div>
 

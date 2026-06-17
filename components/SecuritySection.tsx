@@ -8,7 +8,7 @@ const platforms = [
     iconColor: 'text-[#ededf5]',
     name: 'macOS',
     badge: 'Gatekeeper',
-    warning: '"scrcpy GUI cannot be opened because it is from an unidentified developer."',
+    warning: '"Scry cannot be opened because it is from an unidentified developer."',
     steps: [
       <>Find the app in <strong className="text-[#ededf5]">Finder</strong> (not Launchpad)</>,
       <>
@@ -42,7 +42,7 @@ const platforms = [
       <>
         Run{' '}
         <code className="font-mono text-[11px] text-[#00cba9] bg-[#0b0b14] border border-[#1f1f38] rounded px-1.5 py-0.5">
-          chmod +x scrcpy-gui-*.AppImage
+          chmod +x scry-*.AppImage
         </code>
       </>,
       <>Double-click to launch, or run it from the terminal</>,
@@ -59,7 +59,7 @@ export default function SecuritySection() {
           You may see a security warning
         </h2>
         <p className="text-[16px] text-[#8888b8] max-w-[540px] leading-relaxed">
-          macOS and Windows warn about apps without a paid signing certificate. scrcpy GUI is completely safe —
+          macOS and Windows warn about apps without a paid signing certificate. Scry is completely safe —
           here's exactly what to click on each platform.
         </p>
 

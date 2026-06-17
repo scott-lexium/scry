@@ -7,12 +7,12 @@ const DL = (file: string) =>
   `https://github.com/scott-lexium/scrcpy/releases/latest/download/${file}`
 
 const allFiles = [
-  { file: 'scrcpy-gui-mac-arm64.dmg',         platform: 'macOS',   arch: 'arm64', size: '~85 MB' },
-  { file: 'scrcpy-gui-mac-x64.dmg',           platform: 'macOS',   arch: 'x64',   size: '~88 MB' },
-  { file: 'scrcpy-gui-win-x64.exe',           platform: 'Windows', arch: 'x64',   size: '~78 MB' },
-  { file: 'scrcpy-gui-win-x64-portable.exe',  platform: 'Windows', arch: 'x64',   size: '~78 MB' },
-  { file: 'scrcpy-gui-linux-x64.AppImage',    platform: 'Linux',   arch: 'x64',   size: '~90 MB' },
-  { file: 'scrcpy-gui-linux-x64.deb',         platform: 'Linux',   arch: 'x64',   size: '~65 MB' },
+  { file: 'scry-mac-arm64.dmg',         platform: 'macOS',   arch: 'arm64', size: '~85 MB' },
+  { file: 'scry-mac-x64.dmg',           platform: 'macOS',   arch: 'x64',   size: '~88 MB' },
+  { file: 'scry-win-x64.exe',           platform: 'Windows', arch: 'x64',   size: '~78 MB' },
+  { file: 'scry-win-x64-portable.exe',  platform: 'Windows', arch: 'x64',   size: '~78 MB' },
+  { file: 'scry-linux-x64.AppImage',    platform: 'Linux',   arch: 'x64',   size: '~90 MB' },
+  { file: 'scry-linux-x64.deb',         platform: 'Linux',   arch: 'x64',   size: '~65 MB' },
 ]
 
 type GuideStep = { title: string; body?: string; code?: string }
@@ -22,27 +22,27 @@ const guides: Record<string, { label: string; steps: GuideStep[] }> = {
     label: 'macOS',
     steps: [
       { title: 'Download the DMG for your Mac', body: 'M1/M2/M3/M4 → download arm64. Older Intel Mac → download x64. Not sure? Apple menu → About This Mac.' },
-      { title: 'Open the DMG and drag to Applications', body: 'Double-click the downloaded .dmg, then drag scrcpy GUI to your Applications folder.' },
+      { title: 'Open the DMG and drag to Applications', body: 'Double-click the downloaded .dmg, then drag Scry to your Applications folder.' },
       { title: 'Right-click → Open on first launch', body: 'In Finder (not Launchpad), right-click the app and choose Open. Then click Open in the dialog. You only need to do this once.' },
-      { title: 'Allow it in System Settings if needed', body: 'If you see "cannot be opened", go to System Settings → Privacy & Security and click Open Anyway next to scrcpy GUI.' },
+      { title: 'Allow it in System Settings if needed', body: 'If you see "cannot be opened", go to System Settings → Privacy & Security and click Open Anyway next to Scry.' },
     ],
   },
   win: {
     label: 'Windows',
     steps: [
-      { title: 'Download the installer', body: 'Download scrcpy-gui-win-x64.exe (installer) or the portable .exe if you prefer not to install.' },
+      { title: 'Download the installer', body: 'Download scry-win-x64.exe (installer) or the portable .exe if you prefer not to install.' },
       { title: 'Bypass Windows SmartScreen', body: 'When the blue "Windows protected your PC" screen appears, click More info, then Run anyway. SmartScreen warns about any unsigned executable — the app is safe.' },
-      { title: 'Complete the installer', body: 'Follow the installer steps. It installs to C:\\Program Files\\scrcpy GUI and creates a Start Menu shortcut.' },
-      { title: 'Launch from the Start Menu', body: 'Search for scrcpy GUI in the Start Menu or use the desktop shortcut.' },
+      { title: 'Complete the installer', body: 'Follow the installer steps. It installs to C:\\Program Files\\Scry and creates a Start Menu shortcut.' },
+      { title: 'Launch from the Start Menu', body: 'Search for Scry in the Start Menu or use the desktop shortcut.' },
     ],
   },
   linux: {
     label: 'Linux',
     steps: [
       { title: 'Download the AppImage or .deb', body: 'Use the AppImage for any distro. Use the .deb for Debian, Ubuntu, Pop!_OS, and compatible systems.' },
-      { title: 'Make the AppImage executable', code: 'chmod +x scrcpy-gui-linux-x64.AppImage' },
-      { title: 'Run it', body: 'Double-click in your file manager, or:', code: './scrcpy-gui-linux-x64.AppImage' },
-      { title: 'Or install the .deb', code: 'sudo dpkg -i scrcpy-gui-linux-x64.deb' },
+      { title: 'Make the AppImage executable', code: 'chmod +x scry-linux-x64.AppImage' },
+      { title: 'Run it', body: 'Double-click in your file manager, or:', code: './scry-linux-x64.AppImage' },
+      { title: 'Or install the .deb', code: 'sudo dpkg -i scry-linux-x64.deb' },
     ],
   },
 }
@@ -54,7 +54,7 @@ export default function DownloadPage() {
       <section className="py-20 text-center border-b border-[#1f1f38]">
         <div className="max-w-5xl mx-auto px-6">
           <h1 className="text-[clamp(32px,5vw,52px)] font-extrabold tracking-tight mb-3">
-            Download scrcpy GUI
+            Download Scry
           </h1>
           <p className="text-[17px] text-[#8888b8]">Free, open source. No account required.</p>
         </div>
@@ -65,9 +65,9 @@ export default function DownloadPage() {
         {/* Platform cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { Icon: AppleIcon, iconColor: 'text-[#ededf5]', name: 'macOS',   version: 'Monterey 12+',          note: 'Requires right-click → Open on first launch.', primaryHref: DL('scrcpy-gui-mac-arm64.dmg'),     downloads: [{ label: 'Apple Silicon (arm64)', size: '~85 MB', href: DL('scrcpy-gui-mac-arm64.dmg') }, { label: 'Intel (x64)',            size: '~88 MB', href: DL('scrcpy-gui-mac-x64.dmg') }] },
-            { Icon: WindowsIcon, iconColor: 'text-[#00adef]', name: 'Windows', version: 'Windows 10/11 64-bit', note: 'Click "More info → Run anyway" if SmartScreen blocks it.', primaryHref: DL('scrcpy-gui-win-x64.exe'), downloads: [{ label: 'Installer (.exe)',       size: '~78 MB', href: DL('scrcpy-gui-win-x64.exe') }, { label: 'Portable (no install)', size: '~78 MB', href: DL('scrcpy-gui-win-x64-portable.exe') }] },
-            { Icon: LinuxIcon, iconColor: 'text-[#f5a623]', name: 'Linux',   version: 'x86-64 · Ubuntu 20.04+', note: 'Run chmod +x on the AppImage before launching.',   primaryHref: DL('scrcpy-gui-linux-x64.AppImage'), downloads: [{ label: 'AppImage',               size: '~90 MB', href: DL('scrcpy-gui-linux-x64.AppImage') }, { label: 'Debian / Ubuntu (.deb)', size: '~65 MB', href: DL('scrcpy-gui-linux-x64.deb') }] },
+            { Icon: AppleIcon, iconColor: 'text-[#ededf5]', name: 'macOS',   version: 'Monterey 12+',          note: 'Requires right-click → Open on first launch.', primaryHref: DL('scry-mac-arm64.dmg'),     downloads: [{ label: 'Apple Silicon (arm64)', size: '~85 MB', href: DL('scry-mac-arm64.dmg') }, { label: 'Intel (x64)',            size: '~88 MB', href: DL('scry-mac-x64.dmg') }] },
+            { Icon: WindowsIcon, iconColor: 'text-[#00adef]', name: 'Windows', version: 'Windows 10/11 64-bit', note: 'Click "More info → Run anyway" if SmartScreen blocks it.', primaryHref: DL('scry-win-x64.exe'), downloads: [{ label: 'Installer (.exe)',       size: '~78 MB', href: DL('scry-win-x64.exe') }, { label: 'Portable (no install)', size: '~78 MB', href: DL('scry-win-x64-portable.exe') }] },
+            { Icon: LinuxIcon, iconColor: 'text-[#f5a623]', name: 'Linux',   version: 'x86-64 · Ubuntu 20.04+', note: 'Run chmod +x on the AppImage before launching.',   primaryHref: DL('scry-linux-x64.AppImage'), downloads: [{ label: 'AppImage',               size: '~90 MB', href: DL('scry-linux-x64.AppImage') }, { label: 'Debian / Ubuntu (.deb)', size: '~65 MB', href: DL('scry-linux-x64.deb') }] },
           ].map(({ Icon, iconColor, name, version, note, primaryHref, downloads }) => (
             <div key={name} className="bg-[#16162a] border border-[#1f1f38] rounded-xl p-6 flex flex-col gap-5 hover:border-[#6c5ce7] transition-colors">
               <div className="flex items-center gap-3.5">

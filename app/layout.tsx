@@ -4,11 +4,11 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'scrcpy GUI — Mirror your Android device. No terminal required.',
+  title: 'Scry — Mirror your Android device. No terminal required.',
   description:
     'A beautiful desktop app to mirror, control, and manage your Android device. Built on scrcpy. Free and open source.',
   openGraph: {
-    title: 'scrcpy GUI',
+    title: 'Scry',
     description: 'Mirror your Android device without touching a terminal.',
     images: ['/icon.png'],
   },

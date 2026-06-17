@@ -25,7 +25,7 @@ export function FeatureAutoInstall({ active }: { active: boolean }) {
       } else if (p > 80) {
         setStatus('Adding to system PATH...')
       } else if (p > 40) {
-        setStatus('Extracting files to ~/.scrcpy-gui/bin...')
+        setStatus('Extracting files to ~/.scry/bin...')
       }
       setProgress(p)
     }, 300)
