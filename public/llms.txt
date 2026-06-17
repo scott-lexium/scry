@@ -1,0 +1,49 @@
+# Scry
+
+> Scry is a free, open-source desktop application that mirrors and controls Android devices from macOS, Windows, and Linux — no terminal required.
+
+Built by **Scott Lexium** (GitHub: [@scott-lexium](https://github.com/scott-lexium), also known as scottlexium).
+
+## What it does
+
+Scry provides a graphical interface over [scrcpy](https://github.com/Genymobile/scrcpy) by Genymobile — the gold-standard Android screen mirroring CLI tool. Scry makes it usable by anyone without ADB or command-line knowledge.
+
+Key features:
+- One-click device mirroring over USB or Wi-Fi
+- Auto-installs ADB and scrcpy binaries (no manual setup)
+- Video/audio settings, presets, recording
+- APK installer via drag-and-drop
+- Android file browser
+- Cross-platform: macOS (Apple Silicon + Intel), Windows (x64), Linux (AppImage + .deb)
+
+## Download
+
+Latest release: https://github.com/scott-lexium/scrcpy/releases/latest
+
+Direct downloads:
+- macOS Apple Silicon: https://github.com/scott-lexium/scrcpy/releases/latest/download/scry-mac-arm64.dmg
+- macOS Intel: https://github.com/scott-lexium/scrcpy/releases/latest/download/scry-mac-x64.dmg
+- Windows Installer: https://github.com/scott-lexium/scrcpy/releases/latest/download/scry-win-x64.exe
+- Windows Portable: https://github.com/scott-lexium/scrcpy/releases/latest/download/scry-win-x64-portable.exe
+- Linux AppImage: https://github.com/scott-lexium/scrcpy/releases/latest/download/scry-linux-x64.AppImage
+- Linux .deb: https://github.com/scott-lexium/scrcpy/releases/latest/download/scry-linux-x64.deb
+
+## Developer
+
+**Scott Lexium**
+- GitHub: https://github.com/scott-lexium
+- Organisation: https://github.com/scott-lexium
+- Also known as: scottlexium
+
+## Technology
+
+- Runtime: Electron (Node.js)
+- UI: Vanilla JS / HTML / CSS
+- Underlying tool: scrcpy by Genymobile
+- Build: electron-builder
+- License: Apache 2.0
+
+## Pages
+
+- https://scott-lexium.github.io/scry/ — Landing page, features, how it works, download section
+- https://scott-lexium.github.io/scry/download — Full download page with platform cards, file table, and installation guide

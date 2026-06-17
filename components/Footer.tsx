@@ -58,7 +58,7 @@ export default function Footer() {
             <Link href="https://github.com/Genymobile/scrcpy" target="_blank" className="text-[#8888b8] hover:text-[#ededf5]">
               scrcpy
             </Link>{' '}
-            by Genymobile. Scry by scott-lexium.
+            by Genymobile. Scry by <Link href="https://github.com/scott-lexium" target="_blank" className="text-[#8888b8] hover:text-[#ededf5]">Scott Lexium</Link>.
           </span>
           <Link
             href="https://github.com/scott-lexium/scrcpy/blob/master/LICENSE"

@@ -1,7 +1,20 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import AppleIcon from '@/components/icons/AppleIcon'
 import WindowsIcon from '@/components/icons/WindowsIcon'
 import LinuxIcon from '@/components/icons/LinuxIcon'
+
+export const metadata: Metadata = {
+  title: 'Download Scry — Android Mirror App for macOS, Windows & Linux',
+  description:
+    'Download Scry by Scott Lexium. Free Android mirroring app for macOS (Apple Silicon & Intel), Windows 10/11, and Linux. No terminal required.',
+  alternates: { canonical: '/download' },
+  openGraph: {
+    title: 'Download Scry — Android Mirror App',
+    description: 'Free download for macOS, Windows, and Linux. Mirror your Android device in seconds.',
+    url: 'https://scott-lexium.github.io/scry/download',
+  },
+}
 
 const DL = (file: string) =>
   `https://github.com/scott-lexium/scrcpy/releases/latest/download/${file}`
