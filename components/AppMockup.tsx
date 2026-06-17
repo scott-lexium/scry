@@ -1,7 +1,27 @@
+'use client'
+
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+
 export default function AppMockup() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "center center"]
+  })
+
+  // 3D perspective trapezium effect
+  const rotateX = useTransform(scrollYProgress, [0, 1], [35, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1])
+  const opacity = useTransform(scrollYProgress, [0, 1], [0.4, 1])
+
   return (
-    <div className="w-full max-w-3xl mx-auto mt-14">
-      <div className="rounded-2xl overflow-hidden border border-[#1f1f38] bg-[#10101e] shadow-[0_40px_120px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.04)]">
+    <div ref={containerRef} className="w-full max-w-3xl mx-auto mt-14 [perspective:1200px]">
+      <motion.div 
+        style={{ rotateX, scale, opacity, transformOrigin: 'top center' }}
+        className="rounded-2xl overflow-hidden border border-[#1f1f38] bg-[#10101e] shadow-[0_40px_120px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.04)]"
+      >
         {/* Titlebar */}
         <div className="h-10 bg-[#16162a] border-b border-[#1f1f38] flex items-center px-4 gap-2">
           <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -104,7 +124,7 @@ export default function AppMockup() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

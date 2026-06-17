@@ -1,6 +1,10 @@
 import Link from 'next/link'
+import AppleIcon from '@/components/icons/AppleIcon'
+import WindowsIcon from '@/components/icons/WindowsIcon'
+import LinuxIcon from '@/components/icons/LinuxIcon'
 
-const RELEASES = 'https://github.com/Scottlexium/scrcpy/releases/latest'
+const DL = (file: string) =>
+  `https://github.com/scott-lexium/scrcpy/releases/latest/download/${file}`
 
 const allFiles = [
   { file: 'scrcpy-gui-mac-arm64.dmg',         platform: 'macOS',   arch: 'arm64', size: '~85 MB' },
@@ -61,24 +65,26 @@ export default function DownloadPage() {
         {/* Platform cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { emoji: '🍎', name: 'macOS',   version: 'Monterey 12+',       note: 'Requires right-click → Open on first launch.', downloads: [{ label: 'Apple Silicon (arm64)', size: '~85 MB' }, { label: 'Intel (x64)', size: '~88 MB' }] },
-            { emoji: '🪟', name: 'Windows', version: 'Windows 10/11 64-bit', note: 'Click "More info → Run anyway" if SmartScreen blocks it.', downloads: [{ label: 'Installer (.exe)', size: '~78 MB' }, { label: 'Portable (no install)', size: '~78 MB' }] },
-            { emoji: '🐧', name: 'Linux',   version: 'x86-64 · Ubuntu 20.04+', note: 'Run chmod +x on the AppImage before launching.', downloads: [{ label: 'AppImage', size: '~90 MB' }, { label: 'Debian / Ubuntu (.deb)', size: '~65 MB' }] },
-          ].map(({ emoji, name, version, note, downloads }) => (
+            { Icon: AppleIcon, iconColor: 'text-[#ededf5]', name: 'macOS',   version: 'Monterey 12+',          note: 'Requires right-click → Open on first launch.', primaryHref: DL('scrcpy-gui-mac-arm64.dmg'),     downloads: [{ label: 'Apple Silicon (arm64)', size: '~85 MB', href: DL('scrcpy-gui-mac-arm64.dmg') }, { label: 'Intel (x64)',            size: '~88 MB', href: DL('scrcpy-gui-mac-x64.dmg') }] },
+            { Icon: WindowsIcon, iconColor: 'text-[#00adef]', name: 'Windows', version: 'Windows 10/11 64-bit', note: 'Click "More info → Run anyway" if SmartScreen blocks it.', primaryHref: DL('scrcpy-gui-win-x64.exe'), downloads: [{ label: 'Installer (.exe)',       size: '~78 MB', href: DL('scrcpy-gui-win-x64.exe') }, { label: 'Portable (no install)', size: '~78 MB', href: DL('scrcpy-gui-win-x64-portable.exe') }] },
+            { Icon: LinuxIcon, iconColor: 'text-[#f5a623]', name: 'Linux',   version: 'x86-64 · Ubuntu 20.04+', note: 'Run chmod +x on the AppImage before launching.',   primaryHref: DL('scrcpy-gui-linux-x64.AppImage'), downloads: [{ label: 'AppImage',               size: '~90 MB', href: DL('scrcpy-gui-linux-x64.AppImage') }, { label: 'Debian / Ubuntu (.deb)', size: '~65 MB', href: DL('scrcpy-gui-linux-x64.deb') }] },
+          ].map(({ Icon, iconColor, name, version, note, primaryHref, downloads }) => (
             <div key={name} className="bg-[#16162a] border border-[#1f1f38] rounded-xl p-6 flex flex-col gap-5 hover:border-[#6c5ce7] transition-colors">
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-xl bg-[#10101e] border border-[#1f1f38] flex items-center justify-center text-2xl">{emoji}</div>
+                <div className="w-11 h-11 rounded-xl bg-[#10101e] border border-[#1f1f38] flex items-center justify-center drop-shadow-sm">
+                  <Icon className={`w-[22px] h-[22px] ${iconColor}`} />
+                </div>
                 <div>
                   <p className="font-bold text-[17px]">{name}</p>
                   <p className="text-[12px] text-[#8888b8] mt-0.5">{version}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <Link href={RELEASES} target="_blank" className="flex items-center justify-center bg-gradient-to-r from-[#6c5ce7] to-[#8b7cf8] text-white rounded-lg py-2.5 text-[13px] font-bold hover:-translate-y-px transition-all shadow-[0_4px_16px_rgba(108,92,231,0.35)]">
+                <Link href={primaryHref} target="_blank" className="flex items-center justify-center bg-gradient-to-r from-[#6c5ce7] to-[#8b7cf8] text-white rounded-lg py-2.5 text-[13px] font-bold hover:-translate-y-px transition-all shadow-[0_4px_16px_rgba(108,92,231,0.35)]">
                   Download for {name}
                 </Link>
-                {downloads.map(({ label, size }) => (
-                  <Link key={label} href={RELEASES} target="_blank" className="flex items-center justify-between bg-[#10101e] border border-[#1f1f38] rounded-lg px-3.5 py-2.5 text-[13px] font-medium hover:border-[#8b82f0] transition-all">
+                {downloads.map(({ label, size, href }) => (
+                  <Link key={label} href={href} target="_blank" className="flex items-center justify-between bg-[#10101e] border border-[#1f1f38] rounded-lg px-3.5 py-2.5 text-[13px] font-medium hover:border-[#8b82f0] transition-all">
                     <span>{label}</span>
                     <span className="text-[11px] text-[#44446a]">{size}</span>
                   </Link>
@@ -114,7 +120,7 @@ export default function DownloadPage() {
                     </td>
                     <td className="px-4 py-3.5 text-[#44446a]">{size}</td>
                     <td className="px-4 py-3.5">
-                      <Link href={RELEASES} target="_blank" className="font-semibold text-[#8b82f0] hover:text-[#ededf5] transition-colors">↓ Download</Link>
+                      <Link href={DL(file)} target="_blank" className="font-semibold text-[#8b82f0] hover:text-[#ededf5] transition-colors">↓ Download</Link>
                     </td>
                   </tr>
                 ))}

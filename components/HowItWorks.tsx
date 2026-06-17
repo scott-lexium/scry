@@ -1,3 +1,7 @@
+'use client'
+
+import { motion } from 'framer-motion'
+
 const steps = [
   {
     title: 'Download and open scrcpy GUI',
@@ -32,7 +36,14 @@ export default function HowItWorks() {
 
         <div className="mt-14 flex flex-col divide-y divide-[#1f1f38]">
           {steps.map(({ title, desc, code }, i) => (
-            <div key={title} className="flex gap-7 py-10 first:pt-0 last:pb-0">
+            <motion.div 
+              key={title} 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.15, ease: 'easeOut' }}
+              className="flex gap-7 py-10 first:pt-0 last:pb-0"
+            >
               <div className="w-10 h-10 rounded-xl flex-shrink-0 bg-gradient-to-br from-[#6c5ce7] to-[#8b7cf8] flex items-center justify-center text-white font-extrabold text-[16px]">
                 {i + 1}
               </div>
@@ -45,7 +56,7 @@ export default function HowItWorks() {
                   </code>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

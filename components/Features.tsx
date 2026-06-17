@@ -1,3 +1,8 @@
+'use client'
+
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
 const features = [
   {
     icon: (
@@ -56,31 +61,81 @@ const features = [
 ]
 
 export default function Features() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
   return (
-    <section id="features" className="py-24">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="features" className="py-24 relative bg-[#0b0b14]">
+      {/* Intro Header */}
+      <div className="max-w-6xl mx-auto px-6 mb-12 md:mb-0 text-center md:text-left">
         <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#8b82f0] mb-3">Features</p>
         <h2 className="text-[clamp(28px,4vw,42px)] font-extrabold tracking-tight leading-tight mb-4">
-          Everything you need,<br />nothing you don't
+          Everything you need,<br className="hidden md:block" /> nothing you don't
         </h2>
-        <p className="text-[16px] text-[#8888b8] max-w-[480px] leading-relaxed">
+        <p className="text-[16px] text-[#8888b8] max-w-[480px] mx-auto md:mx-0 leading-relaxed md:hidden">
           A complete Android desktop companion. No terminal, no manual ADB setup, no fumbling with flags.
         </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
-          {features.map(({ icon, title, desc }) => (
-            <div
-              key={title}
-              className="bg-[#16162a] border border-[#1f1f38] rounded-xl p-7 hover:border-[#6c5ce7] hover:-translate-y-0.5 transition-all duration-200"
-            >
-              <div className="w-11 h-11 bg-[rgba(108,92,231,0.15)] rounded-xl flex items-center justify-center text-[#8b82f0] mb-4">
-                {icon}
-              </div>
-              <h3 className="text-[15px] font-bold mb-2">{title}</h3>
-              <p className="text-[13px] text-[#8888b8] leading-relaxed">{desc}</p>
-            </div>
-          ))}
+      <div className="max-w-6xl mx-auto px-6 relative flex flex-col md:flex-row items-start">
+        
+        {/* Left Side: Sticky Text Content */}
+        <div className="hidden md:flex w-full md:w-[45%] md:sticky md:top-0 h-auto md:h-screen flex-col justify-center pr-10 z-10">
+           <AnimatePresence mode="wait">
+             <motion.div
+               key={activeIndex}
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: -20 }}
+               transition={{ duration: 0.3, ease: "easeOut" }}
+             >
+                <div className="w-14 h-14 bg-gradient-to-br from-[#6c5ce7] to-[#8b7cf8] rounded-2xl flex items-center justify-center text-white mb-8 shadow-[0_4px_24px_rgba(108,92,231,0.35)]">
+                   <div className="scale-125">
+                     {features[activeIndex].icon}
+                   </div>
+                </div>
+                <h3 className="text-[clamp(28px,3vw,36px)] font-extrabold text-[#ededf5] mb-5 leading-tight tracking-[-0.02em]">
+                  {features[activeIndex].title}
+                </h3>
+                <p className="text-[18px] text-[#8888b8] leading-relaxed max-w-[420px]">
+                  {features[activeIndex].desc}
+                </p>
+             </motion.div>
+           </AnimatePresence>
         </div>
+
+        {/* Right Side: Scrollable Visuals */}
+        <div className="w-full md:w-[55%] md:pt-[15vh] pb-[5vh] md:pb-[30vh]">
+           {features.map((feature, i) => (
+              <motion.div
+                key={i}
+                className="h-[60vh] md:h-[80vh] flex flex-col items-center justify-center relative mb-8 md:mb-0"
+                viewport={{ margin: "-45% 0px -45% 0px" }}
+                onViewportEnter={() => setActiveIndex(i)}
+              >
+                {/* Visual Block Container */}
+                <div className={`w-full max-w-[480px] aspect-square rounded-[36px] border flex items-center justify-center relative overflow-hidden transition-all duration-700
+                  ${activeIndex === i ? 'border-[#1f1f38] bg-[#16162a] shadow-[0_0_80px_rgba(108,92,231,0.1)] scale-100 opacity-100' : 'border-transparent bg-transparent scale-90 opacity-20'}
+                `}>
+                  {/* Glowing core */}
+                  <div className={`absolute w-[200px] h-[200px] bg-[#6c5ce7] blur-[100px] rounded-full transition-opacity duration-700 ${activeIndex === i ? 'opacity-30' : 'opacity-0'}`} />
+                  
+                  {/* Huge Icon Presentation */}
+                  <div className={`text-[#8b82f0] flex items-center justify-center bg-[rgba(108,92,231,0.05)] w-[160px] h-[160px] rounded-3xl border border-[rgba(108,92,231,0.15)] transition-transform duration-700 ease-out ${activeIndex === i ? 'scale-110 translate-y-0' : 'scale-50 translate-y-10'}`}>
+                    <div className="scale-[3]">
+                      {feature.icon}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Mobile text fallback */}
+                <div className="md:hidden mt-8 text-center px-2">
+                  <h3 className="text-[22px] font-bold text-[#ededf5] mb-2">{feature.title}</h3>
+                  <p className="text-[15px] text-[#8888b8] leading-relaxed">{feature.desc}</p>
+                </div>
+              </motion.div>
+           ))}
+        </div>
+
       </div>
     </section>
   )

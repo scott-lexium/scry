@@ -1,40 +1,50 @@
 import Link from 'next/link'
+import AppleIcon from '@/components/icons/AppleIcon'
+import WindowsIcon from '@/components/icons/WindowsIcon'
+import LinuxIcon from '@/components/icons/LinuxIcon'
 
-const RELEASES = 'https://github.com/Scottlexium/scrcpy/releases/latest'
+const DL = (file: string) =>
+  `https://github.com/scott-lexium/scrcpy/releases/latest/download/${file}`
 
 const platforms = [
   {
-    emoji: '🍎',
+    Icon: AppleIcon,
+    iconColor: 'text-[#ededf5]',
     name: 'macOS',
     version: 'macOS 12 Monterey or later',
     key: 'mac',
+    primaryHref: DL('scrcpy-gui-mac-arm64.dmg'),
     downloads: [
-      { label: 'Apple Silicon (arm64)', size: '~85 MB', href: RELEASES },
-      { label: 'Intel (x64)',           size: '~88 MB', href: RELEASES },
+      { label: 'Apple Silicon (arm64)', size: '~85 MB', href: DL('scrcpy-gui-mac-arm64.dmg') },
+      { label: 'Intel (x64)',           size: '~88 MB', href: DL('scrcpy-gui-mac-x64.dmg') },
     ],
     note: 'Requires right-click → Open on first launch.',
     noteHref: '#security',
   },
   {
-    emoji: '🪟',
+    Icon: WindowsIcon,
+    iconColor: 'text-[#00adef]',
     name: 'Windows',
     version: 'Windows 10 / 11 (64-bit)',
     key: 'win',
+    primaryHref: DL('scrcpy-gui-win-x64.exe'),
     downloads: [
-      { label: 'Installer (.exe)',      size: '~78 MB', href: RELEASES },
-      { label: 'Portable (no install)', size: '~78 MB', href: RELEASES },
+      { label: 'Installer (.exe)',      size: '~78 MB', href: DL('scrcpy-gui-win-x64.exe') },
+      { label: 'Portable (no install)', size: '~78 MB', href: DL('scrcpy-gui-win-x64-portable.exe') },
     ],
     note: 'Click "More info → Run anyway" if SmartScreen appears.',
     noteHref: '#security',
   },
   {
-    emoji: '🐧',
+    Icon: LinuxIcon,
+    iconColor: 'text-[#f5a623]',
     name: 'Linux',
     version: 'x86-64 · Ubuntu 20.04+',
     key: 'linux',
+    primaryHref: DL('scrcpy-gui-linux-x64.AppImage'),
     downloads: [
-      { label: 'AppImage',              size: '~90 MB', href: RELEASES },
-      { label: 'Debian / Ubuntu (.deb)',size: '~65 MB', href: RELEASES },
+      { label: 'AppImage',              size: '~90 MB', href: DL('scrcpy-gui-linux-x64.AppImage') },
+      { label: 'Debian / Ubuntu (.deb)',size: '~65 MB', href: DL('scrcpy-gui-linux-x64.deb') },
     ],
     note: 'Run chmod +x on the AppImage before first launch.',
     noteHref: '#security',
@@ -54,11 +64,11 @@ export default function DownloadSection() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-14">
-          {platforms.map(({ emoji, name, version, downloads, note, noteHref }) => (
+          {platforms.map(({ Icon, iconColor, name, version, primaryHref, downloads, note, noteHref }) => (
             <div key={name} className="bg-[#16162a] border border-[#1f1f38] rounded-xl p-7 flex flex-col gap-5 hover:border-[#6c5ce7] transition-colors">
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-xl bg-[#10101e] border border-[#1f1f38] flex items-center justify-center text-2xl">
-                  {emoji}
+                <div className="w-11 h-11 rounded-xl bg-[#10101e] border border-[#1f1f38] flex items-center justify-center drop-shadow-sm">
+                  <Icon className={`w-[22px] h-[22px] ${iconColor}`} />
                 </div>
                 <div>
                   <p className="font-bold text-[17px]">{name}</p>
@@ -68,7 +78,7 @@ export default function DownloadSection() {
 
               <div className="flex flex-col gap-2">
                 <Link
-                  href={RELEASES}
+                  href={primaryHref}
                   target="_blank"
                   className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#6c5ce7] to-[#8b7cf8] text-white rounded-lg py-2.5 text-[13px] font-bold shadow-[0_4px_16px_rgba(108,92,231,0.35)] hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(108,92,231,0.45)] transition-all"
                 >

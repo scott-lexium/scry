@@ -1,9 +1,15 @@
+'use client'
+
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import AppMockup from '@/components/AppMockup'
 import Features from '@/components/Features'
 import HowItWorks from '@/components/HowItWorks'
 import SecuritySection from '@/components/SecuritySection'
 import DownloadSection from '@/components/DownloadSection'
+import AppleIcon from '@/components/icons/AppleIcon'
+import WindowsIcon from '@/components/icons/WindowsIcon'
+import LinuxIcon from '@/components/icons/LinuxIcon'
 
 const RELEASES = 'https://github.com/Scottlexium/scrcpy/releases/latest'
 
@@ -16,28 +22,49 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_0%,rgba(108,92,231,0.13),transparent)] pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto px-6">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-[rgba(108,92,231,0.15)] border border-[rgba(108,92,231,0.35)] text-[#8b82f0] text-[12px] font-bold tracking-[0.04em] uppercase px-3 py-1.5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00cba9] animate-pulse-dot" />
-            Free &amp; Open Source
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-[rgba(108,92,231,0.15)] border border-[rgba(108,92,231,0.35)] text-[#8b82f0] text-[12px] font-bold tracking-[0.04em] uppercase px-3 py-1.5 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00cba9] animate-pulse-dot" />
+              Free &amp; Open Source
+            </div>
+          </motion.div>
 
           {/* Heading */}
-          <h1 className="text-[clamp(40px,7vw,72px)] font-extrabold tracking-[-0.03em] leading-[1.08] mb-5">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+            className="text-[clamp(40px,7vw,72px)] font-extrabold tracking-[-0.03em] leading-[1.08] mb-5"
+          >
             Mirror your Android{' '}
             <br className="hidden sm:block" />
             <span className="bg-gradient-to-r from-[#a598ff] to-[#6c5ce7] bg-clip-text text-transparent">
               without the terminal
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-[clamp(16px,2vw,20px)] text-[#8888b8] max-w-[540px] mx-auto mb-10 leading-relaxed">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+            className="text-[clamp(16px,2vw,20px)] text-[#8888b8] max-w-[540px] mx-auto mb-10 leading-relaxed"
+          >
             A beautiful desktop app built on top of scrcpy. Connect, mirror, control, and manage
             your Android device in seconds — no commands required.
-          </p>
+          </motion.p>
 
           {/* CTAs */}
-          <div className="flex items-center justify-center gap-3 flex-wrap mb-5">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+            className="flex items-center justify-center gap-3 flex-wrap mb-5"
+          >
             <Link
               href={RELEASES}
               target="_blank"
@@ -58,7 +85,7 @@ export default function Home() {
               </svg>
               View on GitHub
             </Link>
-          </div>
+          </motion.div>
 
           <p className="text-[12px] text-[#44446a] tracking-wider">
             Available for{' '}
@@ -77,14 +104,22 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-[#1f1f38]">
           {[
             { value: '90+',      label: 'scrcpy flags exposed' },
-            { value: '3',        label: 'Platforms supported' },
+            { value: '3',        label: 'Platforms supported', isPlatforms: true },
             { value: '$0',       label: 'Cost, forever' },
             { value: '0 clicks', label: 'Terminal commands needed' },
-          ].map(({ value, label }) => (
+          ].map(({ value, label, isPlatforms }: any) => (
             <div key={label} className="text-center px-6 py-2">
-              <p className="text-[30px] font-extrabold tracking-tight bg-gradient-to-r from-[#a598ff] to-[#6c5ce7] bg-clip-text text-transparent">
-                {value}
-              </p>
+              {isPlatforms ? (
+                <div className="flex items-center justify-center gap-4 h-[45px]">
+                  <AppleIcon className="w-7 h-7 text-[#ededf5] drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]" />
+                  <WindowsIcon className="w-6 h-6 text-[#00adef] drop-shadow-[0_0_8px_rgba(0,173,239,0.15)]" />
+                  <LinuxIcon className="w-[26px] h-[26px] text-[#f5a623] drop-shadow-[0_0_8px_rgba(245,166,35,0.15)]" />
+                </div>
+              ) : (
+                <p className="text-[30px] font-extrabold tracking-tight bg-gradient-to-r from-[#a598ff] to-[#6c5ce7] bg-clip-text text-transparent">
+                  {value}
+                </p>
+              )}
               <p className="text-[13px] text-[#8888b8] mt-1">{label}</p>
             </div>
           ))}

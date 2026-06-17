@@ -1,6 +1,11 @@
+import AppleIcon from '@/components/icons/AppleIcon'
+import WindowsIcon from '@/components/icons/WindowsIcon'
+import LinuxIcon from '@/components/icons/LinuxIcon'
+
 const platforms = [
   {
-    emoji: '🍎',
+    Icon: AppleIcon,
+    iconColor: 'text-[#ededf5]',
     name: 'macOS',
     badge: 'Gatekeeper',
     warning: '"scrcpy GUI cannot be opened because it is from an unidentified developer."',
@@ -15,7 +20,8 @@ const platforms = [
     ],
   },
   {
-    emoji: '🪟',
+    Icon: WindowsIcon,
+    iconColor: 'text-[#00adef]',
     name: 'Windows',
     badge: 'SmartScreen',
     warning: '"Windows protected your PC — Microsoft Defender SmartScreen prevented an unrecognized app."',
@@ -26,7 +32,8 @@ const platforms = [
     ],
   },
   {
-    emoji: '🐧',
+    Icon: LinuxIcon,
+    iconColor: 'text-[#f5a623]',
     name: 'Linux',
     badge: 'AppImage',
     warning: 'The AppImage may not be executable after downloading.',
@@ -57,10 +64,10 @@ export default function SecuritySection() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-14">
-          {platforms.map(({ emoji, name, badge, warning, steps }) => (
+          {platforms.map(({ Icon, iconColor, name, badge, warning, steps }) => (
             <div key={name} className="bg-[#16162a] border border-[#1f1f38] rounded-xl overflow-hidden">
               <div className="px-5 py-3.5 border-b border-[#1f1f38] flex items-center gap-2.5 text-[13px] font-bold">
-                <span>{emoji}</span>
+                <Icon className={`w-4 h-4 ${iconColor}`} />
                 <span>{name}</span>
                 <span className="ml-auto text-[10px] font-bold bg-[rgba(108,92,231,0.15)] text-[#8b82f0] px-2 py-0.5 rounded-full">
                   {badge}
